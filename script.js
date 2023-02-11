@@ -81,10 +81,10 @@ function setField() {
 				cells[count] = temp;
 			}
 			if (i * size > maxWidth) {
-				maxWidth = i * size + size;
+				maxWidth = i * size// + size;
 			}
 			if (j * size > maxHeight) {
-				maxHeight = i * size + size;
+				maxHeight = j * size + size;
 			}
 			$('.field').append('<div class="cell ' + cells[count++] + '" style="left: ' + (i * size) + 'px; top: ' + (j * size) + 'px;" id="' + (i * size) + '-' + (j * size) + '"></div>');
 		}
@@ -107,7 +107,7 @@ function play() {
 				break;
 				// down	
 			case 40:
-				if ((top + size) < (maxHeight + size)) {
+				if ((top + size) <= (maxHeight - size)) {
 					top += size;
 					canMove = true;
 				}
@@ -200,7 +200,7 @@ function stoneDown(left, top) {
 		lose();
 	}
 	$('#' + left + '-' + top).attr('id', left + '-' + (top + size));
-	if ((top + size + size) < (maxHeight + size) && (!$('#' + left + '-' + (top + size + size)).hasClass("cell") || $('#' + left + '-' + (top + size + size)).hasClass("player"))) {
+	if ((top + 2 * size) < maxHeight && (!$('#' + left + '-' + (top + size + size)).hasClass("cell") || $('#' + left + '-' + (top + size + size)).hasClass("player"))) {
 		setTimeout(stoneDown, 250, left, top + size);
 	}
 }
